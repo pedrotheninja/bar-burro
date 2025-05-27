@@ -47,7 +47,7 @@
     }
     .badge.filled {
       background: black;
-      /*color: inherit;*/
+      color: #f8dfd1;
     }
     .day {
       display: flex;
@@ -113,7 +113,7 @@
     }
     .time.filled {
       background: black;
-      color: white;
+      color: #f8dfd1;
       border-radius: 50%;
     }
     .time.circle {
