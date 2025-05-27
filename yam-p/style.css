@@ -1,0 +1,133 @@
+  @font-face {
+    font-family: 'Panama';
+    src: 
+         url('fonts/PanamaProportionalBold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+   }
+  @font-face {
+    font-family: 'Panama-Ir';
+    src: 
+         url('fonts/PanamaProportionalIranic.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+   }
+     @font-face {
+    font-family: 'Panama-It';
+    src: 
+         url('fonts/PanamaProportionalItalic.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+   }
+ body {
+      background-color: #f8dfd1;
+      font-family: 'Panama', serif;
+      margin: 0;
+      padding: 20px;
+      color: black;
+    }
+    #scheduleTitle, #monthHeader {
+      font-family: 'Panama';
+      text-transform: uppercase;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .badges {
+      font-family: sans-serif;
+    }
+    .badge {
+      padding: 2px 5px;
+      border: 2px solid black;
+      border-radius: 50px;
+      margin-left: 5px;
+    }
+    .badge.filled {
+      background: black;
+      /*color: inherit;*/
+    }
+    .day {
+      display: flex;
+      align-items: center;
+      border-top: 2px solid black;
+      padding: 20px 0;
+      line-height: 1;
+    }
+    .day-name {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 3em;
+      font-weight: bold;
+      width: 200px;
+    }
+    .day:nth-child(odd) .day-name {
+      font-family: "Panama-Ir";
+    }
+    .day:nth-child(even) .day-name {
+      font-family: "Panama-It";
+    }
+
+    .date {
+      font-size: 0.5em;
+    }
+    .time-row {
+      display: flex;
+      flex-wrap: no-wrap;
+      /*gap: 10px;*/
+      /*margin-left: 10px;*/
+      justify-content: space-between;
+      width: 100%;
+    }
+    .time {
+      font-family: sans-serif;
+      font-size: .9em;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+      border: 2px solid transparent;
+      -webkit-user-select: none; /* Safari */
+      -ms-user-select: none; /* IE 10 and IE 11 */
+      user-select: none; /* Standard syntax */
+    }
+    .time:nth-child(1)::after{
+      font-family: "Panama";
+      content: "am";
+      position: absolute;
+      margin-top: 40px;
+      color: black;
+
+    }
+      .time:nth-child(5)::after{
+        font-family: "Panama";
+      content: "pm";
+      position: absolute;
+      margin-top: 40px;
+      color: black;
+    }
+    .time.filled {
+      background: black;
+      color: white;
+      border-radius: 50%;
+    }
+    .time.circle {
+      border-radius: 50%;
+      border-color: black;
+    }
+    #colorPicker {
+      position: absolute;
+      display: none;
+      appearance: none;
+      -webkit-appearance: none;
+      border: none;
+      background: transparent;
+      width: 0;
+      height: 0;
+      pointer-events: none;
+    }
