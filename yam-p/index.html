@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weekly Schedule Preview</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+  <input type="color" id="colorPicker" />
+
+  <div class="header">
+    <div id="scheduleTitle" style="cursor: pointer;">SCHEDULE</div>
+    <div class="badges">
+      <span class="badge">25m</span>
+      <span class="badge filled">50m</span>
+    </div>
+    <div id="monthHeader"></div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const scheduleTitle = document.getElementById('scheduleTitle');
+      const picker = document.getElementById('colorPicker');
+      scheduleTitle.addEventListener('click', function (event) {
+        picker.style.left = `${event.pageX}px`;
+        picker.style.top = `${event.pageY}px`;
+        picker.style.display = 'block';
+        picker.focus();
+      });
+
+      picker.addEventListener('input', function () {
+        document.body.style.backgroundColor = picker.value;
+        document.querySelectorAll('.filled').forEach(el => {
+          el.style.color = picker.value;
+        });
+
+      });
+
+      const daysContainer = document.createElement('div');
+      const scheduleBody = document.body;
+      const today = new Date();
+      const dayOfWeek = today.getDay();
+      const monday = new Date(today);
+      const offset = (dayOfWeek === 0) ? -6 : 1 - dayOfWeek;
+      monday.setDate(today.getDate() + offset);
+      const dayNames = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+      const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+      const dates = [];
+      for (let i = 0; i < 7; i++) {
+        const date = new Date(monday);
+        date.setDate(monday.getDate() + i);
+        dates.push(date);
+      }
+
+      const uniqueMonths = [...new Set(dates.map(d => monthNames[d.getMonth()]))];
+      document.getElementById('monthHeader').textContent = uniqueMonths.join(' - ');
+
+      dates.forEach(date => {
+        const dayDiv = document.createElement('div');
+        dayDiv.className = 'day';
+
+        const dayName = document.createElement('div');
+        dayName.className = 'day-name';
+        dayName.innerHTML = `${dayNames[date.getDay()]} <span class="date" contenteditable="true">${String(date.getDate()).padStart(2, '0')}</span>`;
+
+        const timeRow = document.createElement('div');
+        timeRow.className = 'time-row';
+        const hours = ['8', '9', '10', '11', '12', '1', '2', '3', '4'];
+        hours.forEach(hour => {
+          const timeDiv = document.createElement('div');
+          timeDiv.className = 'time';
+          timeDiv.textContent = hour;
+          timeDiv.addEventListener('click', () => {
+            if (timeDiv.classList.contains('filled')) {
+              timeDiv.classList.remove('filled');
+              timeDiv.classList.add('circle');
+            } else if (timeDiv.classList.contains('circle')) {
+              timeDiv.classList.remove('circle');
+            } else {
+              timeDiv.classList.add('filled');
+            }
+          });
+          timeRow.appendChild(timeDiv);
+        });
+
+        dayDiv.appendChild(dayName);
+        dayDiv.appendChild(timeRow);
+        scheduleBody.appendChild(dayDiv);
+      });
+    });
+  </script>
+</body>
+</html>
